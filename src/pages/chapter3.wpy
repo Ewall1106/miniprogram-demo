@@ -1,0 +1,79 @@
+<template>
+  <view class="container">
+    <button type="primary" @tap="save">保存图片</button>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+
+export default class Index extends wepy.page {
+  config = {
+    navigationBarTitleText: '小程序的因难技巧'
+  };
+
+  components = {};
+
+  data = {};
+
+  onLoad() {}
+
+  methods = {
+    save() {
+      let self = this;
+      wx.getSetting({
+        success(res) {
+          if (!res.authSetting['scope.writePhotosAlbum']) {
+            wx.authorize({
+              scope: 'scope.writePhotosAlbum',
+              success() {
+                self.saveImage();
+              },
+              fail() {
+                wx.openSetting({
+                  success: res => {}
+                });
+              }
+            });
+          } else {
+            self.saveImage();
+          }
+        }
+      });
+    }
+  };
+
+  // 封装保存图片到本地函数
+  saveImage() {
+    wx.downloadFile({
+      url:
+        'http://upload.jianshu.io/admin_banners/web_images/4435/c1d3ca63353c8bd527f0d781605516cb5b266d02.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/1250/h/540',
+      success: function(res) {
+        if (res.statusCode === 200) {
+          let img = res.tempFilePath;
+          wx.saveImageToPhotosAlbum({
+            filePath: img,
+            success(res) {
+              wepy.showToast({
+                title: '保存成功',
+                icon: 'success',
+                duration: 2000
+              });
+            },
+            fail(res) {
+              wepy.showToast({
+                title: '保存失败',
+                icon: 'success',
+                duration: 2000
+              });
+            }
+          });
+        }
+      }
+    });
+  }
+}
+</script>
+
+<style lang="less">
+</style>

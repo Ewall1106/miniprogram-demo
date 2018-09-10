@@ -1,6 +1,6 @@
 <template>
   <view class="container">
-    <button type="primary" @tap="saveImage">保存图片</button>
+    <button type="primary" @tap="chapter3">chapter3</button>
   </view>
 </template>
 
@@ -12,48 +12,9 @@ export default class Index extends wepy.page {
     navigationBarTitleText: '小程序的因难技巧'
   };
 
-  components = {};
-
-  data = {};
-
-  onLoad() {}
-
   methods = {
-    saveImage() {
-      wepy.showLoading({
-        title: '保存中...', //提示的内容,
-        mask: true, //显示透明蒙层，防止触摸穿透,
-        success: res => {}
-      });
-      wx.downloadFile({
-        url:
-          'http://upload.jianshu.io/admin_banners/web_images/4435/c1d3ca63353c8bd527f0d781605516cb5b266d02.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/1250/h/540',
-        success: function(res) {
-          console.log(res);
-          if (res.statusCode === 200) {
-            let img = res.tempFilePath;
-            wx.saveImageToPhotosAlbum({
-              filePath: img,
-              success(res) {
-                wepy.hideLoading();
-                wepy.showToast({
-                  title: '保存成功',
-                  icon: 'success',
-                  duration: 2000
-                });
-              },
-              fail(res) {
-                wepy.hideLoading();
-                wepy.showToast({
-                  title: '保存失败',
-                  icon: 'success',
-                  duration: 2000
-                });
-              }
-            });
-          }
-        }
-      });
+    chapter3() {
+      wepy.navigateTo({ url: '/pages/chapter3' });
     }
   };
 }
