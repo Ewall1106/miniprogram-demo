@@ -1,0 +1,60 @@
+<template>
+  <view class="container">
+    <movable-area>
+      <movable-view direction="horizontal" x="{{xmove}}" out-of-bounds="true" inertia="true" bindchange="handleMovableChange">
+        <view class="content">我是内容</view>
+      </movable-view>
+    </movable-area>
+    <view class="delete">删除</view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+
+export default class Chapter5 extends wepy.page {
+  config = {
+    navigationBarTitleText: '小程序的因难技巧'
+  };
+
+  components = {};
+
+  data = {};
+
+  onLoad() {}
+
+  methods = {};
+}
+</script>
+
+<style lang="less">
+.container {
+  display: flex;
+  flex-direction: row;
+  movable-area {
+    width: 600rpx;
+    height: 120rpx;
+    movable-view {
+      width: 100vw;
+      height: 120rpx;
+      .content {
+        width: 100%;
+        height: 100%;
+        line-height: 120rpx;
+        color: #000;
+        background: #fff;
+        border: 1px solid #eee;
+      }
+    }
+  }
+  .delete {
+    width: 150rpx;
+    height: 120rpx;
+    text-align: center;
+    line-height: 120rpx;
+    font-size: 26rpx;
+    color: #fff;
+    background: red;
+  }
+}
+</style>
