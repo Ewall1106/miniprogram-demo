@@ -1,6 +1,7 @@
 <template>
   <view class="container">
     <button type="primary" @tap="chapter4">chapter4</button>
+    <button type="primary" @tap="chapter5">chapter5</button>
   </view>
 </template>
 
@@ -15,10 +16,18 @@ export default class Index extends wepy.page {
   methods = {
     chapter4() {
       wepy.navigateTo({ url: '/pages/chapter4' });
+    },
+    chapter5() {
+      wepy.navigateTo({ url: '/pages/chapter5' });
     }
   };
 }
 </script>
 
 <style lang="less">
+.container {
+  button {
+    margin-bottom: 10rpx;
+  }
+}
 </style>

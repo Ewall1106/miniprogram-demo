@@ -1,0 +1,114 @@
+<template>
+  <view class="container">
+    <view class="main">
+      <view class="main_item">
+        <movable-area>
+          <movable-view damping="100" out-of-bounds="true" direction="horizontal" x="{{x}}" animation="false" bindchange="handleMovableChange" @touchend="handleTouchend" @touchstart="handleTouchestart">
+            <view class="main_item_content ">
+              这里是内容区域
+            </view>
+          </movable-view>
+        </movable-area>
+        <view class="delete_btn " data-productIndex="{{index}} " bindtap="handleDeleteProduct ">删除</view>
+      </view>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+
+export default class Chapter5 extends wepy.page {
+  data = {
+    // x轴方向的偏移
+    x: 0,
+    // 当前x的值
+    currentX: 0,
+    // 是不是正在移动
+    isMove: false
+  };
+
+  watch = {
+    isMove(val) {
+      if (!val) {
+        if (this.currentX < 0 && this.currentX < -46) {
+          this.show();
+        } else {
+          this.hidden();
+        }
+      }
+    }
+  };
+
+  methods = {
+    handleMovableChange(e) {
+      this.currentX = e.detail.x;
+      this.$apply();
+    },
+    handleTouchestart(e) {
+      this.isMove = true;
+      this.$apply();
+    },
+    handleTouchend(e) {
+      this.x = this.currentX;
+      this.isMove = false;
+      this.$apply();
+    }
+  };
+
+  // 显示删除按钮
+  show(e) {
+    this.x = -92;
+    this.$apply();
+  }
+
+  // 隐藏删除按钮
+  hidden(e) {
+    this.x = 0;
+    this.$apply();
+  }
+}
+</script>
+
+<style lang="less" scoped>
+.container {
+  .main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .main_item {
+      display: flex;
+      flex-direction: row;
+      overflow: hidden;
+      movable-area {
+        width: 532rpx;
+        height: 201rpx;
+        background: #fff;
+        movable-view {
+          width: 716rpx;
+          height: 201rpx;
+          .main_item_content {
+            box-sizing: border-box;
+            height: 201rpx;
+            border-radius: 10rpx;
+            line-height: 201rpx;
+            color: #8e8e8e;
+            padding-left: 10px;
+            background: #eee;
+          }
+        }
+      }
+      .delete_btn {
+        width: 184rpx;
+        height: 201rpx;
+        background-color: #ff81b4;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        color: #fff;
+        font-size: 28rpx;
+        text-align: center;
+        line-height: 201rpx;
+      }
+    }
+  }
+}
+</style>

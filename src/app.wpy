@@ -7,11 +7,11 @@ import 'wepy-async-function';
 
 export default class extends wepy.app {
   config = {
-    pages: ['pages/index', 'pages/chapter4'],
+    pages: ['pages/index', 'pages/chapter4', 'pages/chapter5'],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: 'WeChat',
+      navigationBarTitleText: '小程序的因难技巧',
       navigationBarTextStyle: 'black'
     }
   };
