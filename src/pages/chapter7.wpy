@@ -39,6 +39,7 @@ export default class Chapter7 extends wepy.page {
         title: '这里是内容区域3'
       }
     ],
+    // 记录当前偏移量
     currentX: 0
   };
 
