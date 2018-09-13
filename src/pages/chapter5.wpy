@@ -22,21 +22,7 @@ export default class Chapter5 extends wepy.page {
     // x轴方向的偏移
     x: 0,
     // 当前x的值
-    currentX: 0,
-    // 是不是正在移动
-    isMove: false
-  };
-
-  watch = {
-    isMove(val) {
-      if (!val) {
-        if (this.currentX < -46) {
-          this.show();
-        } else {
-          this.hidden();
-        }
-      }
-    }
+    currentX: 0
   };
 
   methods = {
@@ -44,28 +30,22 @@ export default class Chapter5 extends wepy.page {
       this.currentX = e.detail.x;
       this.$apply();
     },
-    handleTouchestart(e) {
-      this.isMove = true;
-      this.$apply();
-    },
     handleTouchend(e) {
-      this.x = this.currentX;
-      this.isMove = false;
-      this.$apply();
-    }
+      this.isMove = true;
+      if (this.currentX < -46) {
+        this.x = -92;
+        this.setData({
+          x: this.x
+        });
+      } else {
+        this.x = 0;
+        this.setData({
+          x: this.x
+        });
+      }
+    },
+    handleTouchestart(e) {}
   };
-
-  // 显示删除按钮
-  show(e) {
-    this.x = -92;
-    this.$apply();
-  }
-
-  // 隐藏删除按钮
-  hidden(e) {
-    this.x = 0;
-    this.$apply();
-  }
 }
 </script>
 
