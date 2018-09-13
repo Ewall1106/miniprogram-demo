@@ -30,7 +30,7 @@ export default class Chapter5 extends wepy.page {
   watch = {
     isMove(val) {
       if (!val) {
-        if (this.currentX < 0 && this.currentX < -46) {
+        if (this.currentX < -46) {
           this.show();
         } else {
           this.hidden();
