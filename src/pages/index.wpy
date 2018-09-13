@@ -1,7 +1,9 @@
 <template>
   <view class="container">
-    <button type="primary" @tap="chapter4">chapter4</button>
-    <button type="primary" @tap="chapter5">chapter5</button>
+    <button type="primary" @tap="gotoChapter(4)">chapter4</button>
+    <button type="primary" @tap="gotoChapter(5)">chapter5</button>
+    <button type="primary" @tap="gotoChapter(5)">chapter6</button>
+    <button type="primary" @tap="gotoChapter(7)">chapter7</button>
   </view>
 </template>
 
@@ -14,11 +16,8 @@ export default class Index extends wepy.page {
   };
 
   methods = {
-    chapter4() {
-      wepy.navigateTo({ url: '/pages/chapter4' });
-    },
-    chapter5() {
-      wepy.navigateTo({ url: '/pages/chapter5' });
+    gotoChapter(idx) {
+       wepy.navigateTo({ url: `/pages/chapter${idx}` });
     }
   };
 }
