@@ -40,25 +40,37 @@ export default class Chapter7 extends wepy.page {
       }
     ],
     // 记录当前偏移量
-    currentX: 0
+    currentX: 0,
+    // 用户是否在触摸
+    isTouchMove: false
   };
 
   methods = {
     handleMovableChange(e) {
+      if (
+        e.detail.source === 'touch' ||
+        e.detail.source === 'touch-out-of-bounds'
+      ) {
+        this.isTouchMove = true;
+      } else {
+        this.isTouchMove = false;
+      }
       this.currentX = e.detail.x;
       this.$apply();
     },
     handleTouchend(idx, e) {
-      if (this.currentX < -46) {
-        this.list[idx].x = -92;
-        this.setData({
-          list: this.list
-        });
-      } else {
-        this.list[idx].x = 0;
-        this.setData({
-          list: this.list
-        });
+      if (this.isTouchMove) {
+        if (this.currentX < -46) {
+          this.list[idx].x = -92;
+          this.setData({
+            list: this.list
+          });
+        } else {
+          this.list[idx].x = 0;
+          this.setData({
+            list: this.list
+          });
+        }
       }
     },
     handleTouchestart(e) {},
