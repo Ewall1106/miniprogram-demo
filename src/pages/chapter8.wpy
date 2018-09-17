@@ -1,0 +1,54 @@
+<template>
+  <view class="container">
+    <!-- 选项栏 -->
+    <view class="title">
+      <view wx:for="{{list}}" wx:key="index" class="list_item {{activeIndex == index ? 'on' : ''}}" bindtap="tabClick({{index}})">{{item}}</view>
+    </view>
+    <!-- 内容 -->
+    <view class="content">
+      <view style="display:{{activeIndex !== 0 ? 'none' : 'block'}}">0</view>
+      <view style="display:{{activeIndex !== 1 ? 'none' : 'block'}}">1</view>
+      <view style="display:{{activeIndex !== 2 ? 'none' : 'block'}}">2</view>
+      <view style="display:{{activeIndex !== 3 ? 'none' : 'block'}}">3</view>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+
+export default class Chapter8 extends wepy.page {
+  data = {
+    list: ['全款', '待收货', '待发货', '已收货'],
+    activeIndex: 0
+  };
+
+  methods = {
+    tabClick(val) {
+      this.activeIndex = val;
+      this.$apply();
+    }
+  };
+}
+</script>
+
+<style lang="less" scoped>
+.container {
+  .title {
+    display: flex;
+    flex-direction: row;
+    .list_item {
+      flex-grow: 1;
+      box-sizing: border-box;
+      height: 85rpx;
+      font-size: 32rpx;
+      text-align: center;
+      line-height: 85rpx;
+      border-bottom: 4rpx solid #eee;
+    }
+    .on {
+      border-bottom: 4rpx solid #fe2a7e;
+      color: #fe2a7e;
+    }
+  }
+}
+</style>
