@@ -1,0 +1,43 @@
+<template>
+  <view class="container">
+    <!-- 竖向滚动 -->
+    <view class="vertical">
+      <scroll-view scroll-y style="height: 200px;">
+        <view class="green" style="width: 100%; height: 200px; background: green;"></view>
+        <view class="red" style="width: 100%; height: 200px; background: red;"></view>
+        <view class="yellow" style="width: 100%; height: 200px; background: yellow;"></view>
+        <view class="blue" style="width: 100%; height: 200px; background: blue;"></view>
+      </scroll-view>
+    </view>
+    <!-- 横向滚动 -->
+    <view class="horizontal">
+      <scroll-view scroll-x style="width: 100%; white-space: nowrap;">
+        <view class="green" style="display: inline-block; width: 200px; height: 200px; background: green;"></view>
+        <view class="red" style="display: inline-block; width: 200px; height: 200px; background: red;"></view>
+        <view class="yellow" style="display: inline-block; width: 200px; height: 200px; background: yellow;"></view>
+        <view class="blue" style="display: inline-block; width: 200px; height: 200px; background: blue;"></view>
+      </scroll-view>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+
+export default class Chapter9 extends wepy.page {
+  data = {};
+
+  methods = {};
+}
+</script>
+
+<style lang="less" scoped>
+.container {
+  // 竖向滚动
+  .vertical {
+    margin-bottom: 20px;
+  }
+  // 横向滚动
+  .horizontal {
+  }
+}
+</style>
