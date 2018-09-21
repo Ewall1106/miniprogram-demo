@@ -1,0 +1,70 @@
+<template>
+  <view class="container">
+    <view class="title">
+      <text class="title_txt">标题标题</text>
+      <image class="title_icon" src="{{isShow ? '/assets/images/arrow_down.png' : '/assets/images/arrow_up.png'}}" @tap="toggle" />
+    </view>
+    <view class="content {{isShow ? 'on' : ''}}">
+      我所有的自负皆来自我的自卑，所有的英雄气概都来自于我的软弱。嘴里振振有词是因为心里满是怀疑，深情是因为痛恨自己无情。这世界没有一件事情是虚空而生的，站在光里，背后就会有阴影，这深夜里一片寂静，是因为你还没有听见声音。
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+
+export default class Chapter10 extends wepy.page {
+  config = {
+    navigationBarTitleText: '展开/收起'
+  };
+
+  data = {
+    isShow: false
+  };
+
+  methods = {
+    toggle() {
+      this.isShow = !this.isShow;
+      this.$apply();
+    }
+  };
+}
+</script>
+
+<style lang="less" scoped>
+.container {
+  .title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25rpx;
+    .title_txt {
+      font-size: 34rpx;
+      color: #2b2b2b;
+    }
+    .title_icon {
+      display: block;
+      width: 21rpx;
+      height: 11rpx;
+      padding: 10rpx;
+    }
+  }
+  .content {
+    height: 80rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-overflow: -o-ellipsis-lastline;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    padding: 0 25rpx;
+    font-size: 30rpx;
+    color: #888888;
+    &.on {
+      display: block;
+      text-overflow: clip;
+      overflow: visible;
+    }
+  }
+}
+</style>

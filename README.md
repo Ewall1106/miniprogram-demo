@@ -22,6 +22,8 @@ $ wepy build --watch
 - 小程序生命周期及页面生命周期
 - 保存图片到手机相册①
 - chapter4 保存图片到手机相册②（用户授权）
-- chapter7 小程序 — 实现左滑删除效果①②③
+- chapter5/6/7 小程序 — 实现左滑删除效果①②③
 - chapter8 小程序 — 选项卡
+- chapter9 小程序 — scroll-view组件实现滚动
+- chapter10 小程序 — 展开/收起
 

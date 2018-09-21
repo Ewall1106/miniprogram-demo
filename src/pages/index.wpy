@@ -6,6 +6,7 @@
     <button type="primary" @tap="gotoChapter(7)">chapter7</button>
     <button type="primary" @tap="gotoChapter(8)">chapter8</button>
     <button type="primary" @tap="gotoChapter(9)">chapter9</button>
+    <button type="primary" @tap="gotoChapter(10)">chapter10</button>
   </view>
 </template>
 
