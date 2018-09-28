@@ -14,7 +14,8 @@ export default class extends wepy.app {
       'pages/chapter7',
       'pages/chapter8',
       'pages/chapter9',
-      'pages/chapter10'
+      'pages/chapter10',
+      'pages/chapter11'
     ],
     window: {
       backgroundTextStyle: 'light',

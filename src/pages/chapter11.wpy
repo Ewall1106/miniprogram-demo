@@ -1,0 +1,126 @@
+<template>
+  <view class="container">
+    <view class="show_block">
+      <image class="bg" src="{{bgSrc}}" />
+      <image class="img" src="{{imgSrc}}" />
+      <canvas class="myCanvas" canvas-id="myCanvas" style="width: 375px; height: 417px;"></canvas>
+    </view>
+    <button @tap="choose">选择图片</button>
+    <button @tap="save">保存海报</button>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+
+export default class Chapter11 extends wepy.page {
+  config = {
+    navigationBarTitleText: 'canvas图片合成'
+  };
+
+  data = {
+    bgSrc: '/assets/images/bg.png',
+    imgSrc: ''
+  };
+
+  methods = {
+    choose() {
+      let self = this;
+      wx.chooseImage({
+        success: function(res) {
+          self.imgSrc = res.tempFilePaths[0];
+          self.$apply();
+        }
+      });
+      this.$apply();
+    },
+    save() {
+      let self = this;
+      if (!this.imgSrc) {
+        wepy.showToast({
+          title: '请先选择图片',
+          icon: 'none',
+          duration: 2000
+        });
+        return false;
+      }
+      wx.getSetting({
+        success(res) {
+          if (!res.authSetting['scope.writePhotosAlbum']) {
+            wx.authorize({
+              scope: 'scope.writePhotosAlbum',
+              success() {
+                self.saveImage();
+              }
+            });
+          } else {
+            self.saveImage();
+          }
+        }
+      });
+    }
+  };
+  // 封装保存图片到本地函数
+  saveImage() {
+    wepy.showLoading({
+      title: '保存中...'
+    });
+    let self = this;
+    const ctx = wx.createCanvasContext('myCanvas');
+    ctx.drawImage(self.bgSrc, 0, 0, 375, 417);
+    ctx.drawImage(self.imgSrc, 57, 44, 260, 264);
+    ctx.draw(false, function(e) {
+      // 保存到本地
+      wx.canvasToTempFilePath({
+        x: 0,
+        y: 0,
+        width: 375,
+        height: 417,
+        canvasId: 'myCanvas',
+        success: function(res) {
+          let pic = res.tempFilePath;
+          wx.saveImageToPhotosAlbum({
+            filePath: pic,
+            success(res) {
+              wx.hideLoading();
+              wx.showToast({
+                title: '保存成功',
+                icon: 'success',
+                duration: 2000
+              });
+            }
+          });
+        }
+      });
+    });
+  }
+}
+</script>
+
+<style lang="less" scoped>
+.container {
+  .show_block {
+    position: relative;
+    width: 750rpx;
+    height: 834rpx;
+    .bg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    .img {
+      position: absolute;
+      top: 86rpx;
+      left: 114rpx;
+      display: block;
+      width: 520rpx;
+      height: 527rpx;
+    }
+    .myCanvas {
+      z-index: -1;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+}
+</style>

@@ -14,6 +14,7 @@ $ wepy build --watch
 ```
 
 ## 系列文章
+https://www.jianshu.com/nb/25075057
 
 ## 代码说明
 > 文件中chapter*代表每个章节的代码，与专栏文章序号相对应， 当然，你也可以clone相应分支的代码。
@@ -26,4 +27,5 @@ $ wepy build --watch
 - chapter8 小程序 — 选项卡
 - chapter9 小程序 — scroll-view组件实现滚动
 - chapter10 小程序 — 展开/收起
+- chapter11 小程序 — canvas图片合成
 
